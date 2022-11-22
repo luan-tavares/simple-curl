@@ -1,0 +1,35 @@
+{
+    "name": "luan-tavares/simple-curl",
+    "license": "MIT",
+    "description": "Simple Curl without leak",
+    "keywords": ["api","integration"],
+    "type": "library",
+    "authors": [
+        {
+            "name": "Luan Tavares Lourenço",
+            "email": "luan.tavares.lourenco@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LTL\\Curl\\": ["src/"]
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "luan-tavares/simple-deploy": "^1.0"
+    },
+    "require-dev": {
+        "larapack/dd": "1.*",
+        "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+        "deploy-tag": [
+            "LTL\\Deploy\\DeployTag::execute"
+        ],
+        "deploy": [
+            "LTL\\Deploy\\Deploy::execute"
+        ]
+    }
+}
