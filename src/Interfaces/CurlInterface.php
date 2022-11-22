@@ -2,7 +2,7 @@
 
 namespace LTL\Curl\Interfaces;
 
-use CurlHandle;
+use LTL\Curl\Interfaces\ResponseInterface;
 
 interface CurlInterface
 {

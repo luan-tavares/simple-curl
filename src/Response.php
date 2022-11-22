@@ -15,8 +15,6 @@ class Response implements ResponseInterface
 
     private ResponseHeader $header;
 
-    private string $uri;
-
     public function __construct(private Request $request)
     {
         $fullResponse = curl_exec($request->curl());
@@ -24,8 +22,6 @@ class Response implements ResponseInterface
         $headerSize = curl_getinfo($request->curl(), CURLINFO_HEADER_SIZE);
 
         $status = curl_getinfo($request->curl(), CURLINFO_HTTP_CODE);
-
-        $this->uri = $request->uri();
 
         $this->body = $this->makeResponseBody($fullResponse, $headerSize);
 
@@ -95,5 +91,10 @@ class Response implements ResponseInterface
     public function headers(): array|null
     {
         return $this->header->get();
+    }
+
+    public function uri(): string
+    {
+        return $this->request->uri();
     }
 }
