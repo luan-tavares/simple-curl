@@ -25,7 +25,7 @@ $post_data = [
 ];
 
 $response = (new Curl('https://api.hubapi.com/filemanager/api/v3/files/upload'))
-    ->bearerToken('{{token}}')
+    ->bearerToken(ENV['TOKEN'])
     ->multipartFormData()
     ->progressBar()
     ->post($post_data);

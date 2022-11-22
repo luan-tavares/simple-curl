@@ -13,5 +13,4 @@ interface CurlResponseInterface
     public function toArray(): array;
     public function toObject(): object|array|null;
     public function headers(): array|null;
-    public function uri(): string;
 }

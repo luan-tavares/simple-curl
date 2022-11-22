@@ -4,16 +4,21 @@ use LTL\Curl\Curl;
 
 require_once __DIR__ .'/__init.php';
 
-dd(
+dump(
     (new Curl('https://api.hubspot.com/crm/v3/objects/contacts'))
-        ->bearerToken('{{token}}')
+        ->bearerToken(ENV['TOKEN'])
         ->post(['properties' => ['email' => 'a@teste.com']])
 );
 
-$response = (new Curl('http://viacep.com.br/ws/01001000/json/'))->withHeaders()->get();
+$curl = (new Curl('http://viacep.com.br/ws/01001000/json/'))->withHeaders()->get();
 
 dd(
-    $response->toObject(),
-    $response->headers(),
-    $response->status()
+    $curl->toObject(),
+    $curl->toArray(),
+    $curl->error(),
+    $curl->isMultiStatus(),
+    $curl->isTooManyCurlRequestsError(),
+    $curl->headers(),
+    $curl->status(),
+    $curl->uri()
 );

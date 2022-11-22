@@ -14,10 +14,21 @@ interface CurlInterface
     public function formUrlEncoded(): self;
     public function progressBar(): self;
     
-    public function request(string $method, array|null $body = null): CurlResponseInterface;
-    public function get(): CurlResponseInterface;
-    public function delete(): CurlResponseInterface;
-    public function post(array|null $body = null): CurlResponseInterface;
-    public function put(array|null $body = null): CurlResponseInterface;
-    public function patch(array|null $body = null): CurlResponseInterface;
+    public function request(string $method, array|null $body = null): self;
+    public function get(): self;
+    public function delete(): self;
+    public function post(array|null $body = null): self;
+    public function put(array|null $body = null): self;
+    public function patch(array|null $body = null): self;
+
+    public function status(): int;
+    public function error(): bool;
+    public function isMultiStatus(): bool;
+    public function isTooManyCurlRequestsError(): bool;
+    public function raw(): string|null;
+    public function toJson(): string|null;
+    public function toArray(): array;
+    public function toObject(): object|array|null;
+    public function headers(): array|null;
+    public function uri(): string;
 }

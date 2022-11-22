@@ -14,34 +14,36 @@ class CurlResponse implements CurlResponseInterface
 
     private CurlResponseHeader $header;
 
-    public function __construct(private CurlRequest $request)
+
+
+    public function __construct(CurlRequest $request)
     {
-        $fullCurlResponse = curl_exec($request->curl());
+        $rawResponse = curl_exec($request->curl());
 
         $headerSize = curl_getinfo($request->curl(), CURLINFO_HEADER_SIZE);
+      
+        $this->body = $this->makeCurlResponseBody($request, $rawResponse, $headerSize);
+        
+        $this->header = $this->makeCurlResponseHeader($request, $rawResponse, $headerSize);
 
         $status = curl_getinfo($request->curl(), CURLINFO_HTTP_CODE);
-
-        $this->body = $this->makeCurlResponseBody($fullCurlResponse, $headerSize);
-
-        $this->header = $this->makeCurlResponseHeader($fullCurlResponse, $headerSize);
 
         $this->status = new CurlResponseStatus($status);
     }
 
-    private function makeCurlResponseBody(string $fullCurlResponse, int $headerSize): CurlResponseBody
+    private function makeCurlResponseBody(CurlRequest $request, string $rawResponse, int $headerSize): CurlResponseBody
     {
-        if ($this->request->hasHeaders()) {
-            return new CurlResponseBody(substr($fullCurlResponse, $headerSize));
+        if ($request->hasHeaders()) {
+            return new CurlResponseBody(substr($rawResponse, $headerSize));
         }
         
-        return new CurlResponseBody($fullCurlResponse);
+        return new CurlResponseBody($rawResponse);
     }
 
-    private function makeCurlResponseHeader(string $fullCurlResponse, int $headerSize): CurlResponseHeader
+    private function makeCurlResponseHeader(CurlRequest $request, string $rawResponse, int $headerSize): CurlResponseHeader
     {
-        if ($this->request->hasHeaders()) {
-            return new CurlResponseHeader(substr($fullCurlResponse, 0, $headerSize));
+        if ($request->hasHeaders()) {
+            return new CurlResponseHeader(substr($rawResponse, 0, $headerSize));
         }
         
         return new CurlResponseHeader;
@@ -90,10 +92,5 @@ class CurlResponse implements CurlResponseInterface
     public function headers(): array|null
     {
         return $this->header->get();
-    }
-
-    public function uri(): string
-    {
-        return $this->request->uri();
     }
 }
