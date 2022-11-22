@@ -3,9 +3,9 @@
 namespace LTL\Curl;
 
 use CurlHandle;
-use LTL\Curl\Interfaces\ResponseInterface;
+use LTL\Curl\Interfaces\CurlResponseInterface;
 
-class Request
+class CurlRequest
 {
     private array $params = [];
 
@@ -30,7 +30,7 @@ class Request
         }
     }
 
-    public function connect(string $method, array|null $body = null): ResponseInterface
+    public function connect(string $method, array|null $body = null): CurlResponseInterface
     {
         $this->addBody($body)->addMethod($method);
         
@@ -42,7 +42,7 @@ class Request
             curl_setopt($this->curl, $index, $value);
         }
 
-        $response = new Response($this);
+        $response = new CurlResponse($this);
 
         curl_reset($this->curl);
 

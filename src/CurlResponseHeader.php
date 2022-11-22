@@ -2,7 +2,7 @@
 
 namespace LTL\Curl;
 
-class ResponseHeader
+class CurlResponseHeader
 {
     private array|null $list = null;
 

@@ -2,12 +2,12 @@
 
 namespace LTL\Curl\Interfaces;
 
-interface ResponseInterface
+interface CurlResponseInterface
 {
     public function status(): int;
     public function error(): bool;
     public function isMultiStatus(): bool;
-    public function isTooManyRequestsError(): bool;
+    public function isTooManyCurlRequestsError(): bool;
     public function raw(): string|null;
     public function toJson(): string|null;
     public function toArray(): array;

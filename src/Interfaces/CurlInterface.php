@@ -2,7 +2,7 @@
 
 namespace LTL\Curl\Interfaces;
 
-use LTL\Curl\Interfaces\ResponseInterface;
+use LTL\Curl\Interfaces\CurlResponseInterface;
 
 interface CurlInterface
 {
@@ -14,10 +14,10 @@ interface CurlInterface
     public function formUrlEncoded(): self;
     public function progressBar(): self;
     
-    public function request(string $method, array|null $body = null): ResponseInterface;
-    public function get(): ResponseInterface;
-    public function delete(): ResponseInterface;
-    public function post(array|null $body = null): ResponseInterface;
-    public function put(array|null $body = null): ResponseInterface;
-    public function patch(array|null $body = null): ResponseInterface;
+    public function request(string $method, array|null $body = null): CurlResponseInterface;
+    public function get(): CurlResponseInterface;
+    public function delete(): CurlResponseInterface;
+    public function post(array|null $body = null): CurlResponseInterface;
+    public function put(array|null $body = null): CurlResponseInterface;
+    public function patch(array|null $body = null): CurlResponseInterface;
 }

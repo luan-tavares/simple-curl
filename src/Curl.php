@@ -3,45 +3,45 @@
 namespace LTL\Curl;
 
 use LTL\Curl\Interfaces\CurlInterface;
-use LTL\Curl\Interfaces\ResponseInterface;
-use LTL\Curl\Request;
+use LTL\Curl\Interfaces\CurlResponseInterface;
+use LTL\Curl\CurlRequest;
 
 class Curl implements CurlInterface
 {
-    private Request $request;
+    private CurlRequest $request;
 
     public function __construct(string|null $uri = null)
     {
-        $this->request = new Request($uri);
+        $this->request = new CurlRequest($uri);
     }
 
-    public function get(): ResponseInterface
+    public function get(): CurlResponseInterface
     {
         return $this->request('GET');
     }
 
-    public function post(array|null $body = null): ResponseInterface
+    public function post(array|null $body = null): CurlResponseInterface
     {
         return $this->request('POST', $body);
     }
 
-    public function put(array|null $body = null): ResponseInterface
+    public function put(array|null $body = null): CurlResponseInterface
     {
         return $this->request('PUT', $body);
     }
 
-    public function patch(array|null $body = null): ResponseInterface
+    public function patch(array|null $body = null): CurlResponseInterface
     {
         return $this->request('PATCH', $body);
     }
 
-    public function delete(): ResponseInterface
+    public function delete(): CurlResponseInterface
     {
         return $this->request('DELETE');
     }
 
 
-    public function request(string $method, array|null $body = null): ResponseInterface
+    public function request(string $method, array|null $body = null): CurlResponseInterface
     {
         return $this->request->connect($method, $body);
     }

@@ -4,13 +4,13 @@ namespace LTL\Curl;
 
 use Error;
 
-class ResponseBody
+class CurlResponseBody
 {
     private string|null $response;
 
-    public function __construct(string $rawResponse)
+    public function __construct(string $rawCurlResponse)
     {
-        $this->response = (!empty($rawResponse)) ? $rawResponse : null;
+        $this->response = (!empty($rawCurlResponse)) ? $rawCurlResponse : null;
     }
 
     public function get(): string|null

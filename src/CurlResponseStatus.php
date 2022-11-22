@@ -2,9 +2,9 @@
 
 namespace LTL\Curl;
 
-use LTL\Curl\Interfaces\ResponseStatusInterface;
+use LTL\Curl\Interfaces\CurlResponseStatusInterface;
 
-class ResponseStatus implements ResponseStatusInterface
+class CurlResponseStatus implements CurlResponseStatusInterface
 {
     public function __construct(private int $status)
     {
@@ -25,7 +25,7 @@ class ResponseStatus implements ResponseStatusInterface
         return ($this->status < 200 || $this->status >= 300);
     }
 
-    public function isTooManyRequestsError(): bool
+    public function isTooManyCurlRequestsError(): bool
     {
         return ($this->status === CurlConstants::TOO_MANY_REQUESTS_STATUS);
     }
