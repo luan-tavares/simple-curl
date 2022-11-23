@@ -128,14 +128,9 @@ class Curl implements CurlInterface
         return $this->response->isTooManyCurlRequestsError();
     }
 
-    public function raw(): string|null
+    public function response(): string
     {
-        return $this->response->raw();
-    }
-
-    public function toJson(): string|null
-    {
-        return $this->response->raw();
+        return $this->response->get();
     }
 
     public function toArray(): array

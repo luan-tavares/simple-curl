@@ -8,7 +8,7 @@ interface CurlResponseInterface
     public function error(): bool;
     public function isMultiStatus(): bool;
     public function isTooManyCurlRequestsError(): bool;
-    public function raw(): string|null;
+    public function get(): string;
     public function toJson(): string|null;
     public function toArray(): array;
     public function toObject(): object|array|null;

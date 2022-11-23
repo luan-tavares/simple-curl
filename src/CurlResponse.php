@@ -69,7 +69,7 @@ class CurlResponse implements CurlResponseInterface
         return $this->status->isTooManyCurlRequestsError();
     }
 
-    public function raw(): string|null
+    public function get(): string
     {
         return $this->body->get();
     }

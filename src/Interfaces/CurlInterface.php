@@ -25,8 +25,7 @@ interface CurlInterface
     public function error(): bool;
     public function isMultiStatus(): bool;
     public function isTooManyCurlRequestsError(): bool;
-    public function raw(): string|null;
-    public function toJson(): string|null;
+    public function response(): string;
     public function toArray(): array;
     public function toObject(): object|array|null;
     public function headers(): array|null;

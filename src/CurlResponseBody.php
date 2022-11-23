@@ -6,14 +6,11 @@ use Error;
 
 class CurlResponseBody
 {
-    private string|null $response;
-
-    public function __construct(string $rawCurlResponse)
+    public function __construct(private string $response)
     {
-        $this->response = (!empty($rawCurlResponse)) ? $rawCurlResponse : null;
     }
 
-    public function get(): string|null
+    public function get(): string
     {
         return $this->response;
     }
@@ -29,10 +26,6 @@ class CurlResponseBody
 
     public function toObject(): object|array|null
     {
-        if (is_null($this->response)) {
-            return null;
-        }
-
         return json_decode($this->response);
     }
 }
