@@ -166,6 +166,10 @@ class CurlRequest implements CurlRequestInterface
 
     private function resolveUri(): void
     {
+        if (!isset($this->uri)) {
+            return;
+        }
+
         if (is_null($this->queries)) {
             $this->params[CURLOPT_URL] = $this->uri;
 
