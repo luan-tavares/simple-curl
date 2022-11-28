@@ -4,13 +4,14 @@ namespace LTL\Curl;
 
 use LTL\Curl\CurlRequest;
 use LTL\Curl\Interfaces\CurlInterface;
+use LTL\Curl\Interfaces\CurlRequestInterface;
 use LTL\Curl\Interfaces\CurlResponseInterface;
 
 class Curl implements CurlInterface
 {
-    private CurlRequest $request;
+    private CurlRequestInterface $request;
 
-    private CurlResponse $response;
+    private CurlResponseInterface $response;
 
     public function __construct(string|null $uri = null)
     {
@@ -95,6 +96,13 @@ class Curl implements CurlInterface
     public function addUri(string $uri): self
     {
         $this->request->addUri($uri);
+
+        return $this;
+    }
+
+    public function addQueries(array $queries): self
+    {
+        $this->request->addQueries($queries);
 
         return $this;
     }

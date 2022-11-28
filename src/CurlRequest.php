@@ -3,21 +3,24 @@
 namespace LTL\Curl;
 
 use CurlHandle;
+use LTL\Curl\Interfaces\CurlRequestInterface;
 use LTL\Curl\Interfaces\CurlResponseInterface;
 
-class CurlRequest
+class CurlRequest implements CurlRequestInterface
 {
     private array $params = [];
 
     private array $headers = [];
 
+    private array|null $queries = null;
+
     private array|null $body = null;
 
     private string $method;
 
-    private CurlHandle $curl;
-
     private string $uri;
+
+    private CurlHandle $curl;
 
     public function __construct(string|null $uri = null)
     {
@@ -80,6 +83,15 @@ class CurlRequest
 
         $this->params[$mixed] = $value;
 
+
+        return $this;
+    }
+
+    public function addQueries(array $queries): self
+    {
+        $this->queries = $queries;
+
+        $this->resolveUri();
 
         return $this;
     }
@@ -147,9 +159,24 @@ class CurlRequest
     {
         $this->uri = $uri;
 
-        $this->params[CURLOPT_URL] = $uri;
+        $this->resolveUri();
 
         return $this;
+    }
+
+    private function resolveUri(): void
+    {
+        if (is_null($this->queries)) {
+            $this->params[CURLOPT_URL] = $this->uri;
+
+            return;
+        }
+
+        $urlQueries = http_build_query($this->queries);
+
+        $this->params[CURLOPT_URL] = "{$this->uri}?{$urlQueries}";
+
+        return;
     }
 
     public function addMethod(string $method): self

@@ -2,13 +2,12 @@
 
 namespace LTL\Curl\Interfaces;
 
-use LTL\Curl\Interfaces\CurlResponseInterface;
-
 interface CurlInterface
 {
     public function addParams(array $params): self;
     public function addHeaders(array $headers): self;
     public function addUri(string $uri): self;
+    public function addQueries(array $queries): self;
     public function withHeaders(): self;
     public function multipartFormData(): self;
     public function formUrlEncoded(): self;

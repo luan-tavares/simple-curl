@@ -4,6 +4,7 @@ namespace LTL\Curl;
 
 use LTL\Curl\CurlResponseBody;
 use LTL\Curl\CurlResponseStatus;
+use LTL\Curl\Interfaces\CurlRequestInterface;
 use LTL\Curl\Interfaces\CurlResponseInterface;
 
 class CurlResponse implements CurlResponseInterface
@@ -16,7 +17,7 @@ class CurlResponse implements CurlResponseInterface
 
 
 
-    public function __construct(CurlRequest $request)
+    public function __construct(CurlRequestInterface $request)
     {
         $rawResponse = curl_exec($request->curl());
 
@@ -31,7 +32,7 @@ class CurlResponse implements CurlResponseInterface
         $this->status = new CurlResponseStatus($status);
     }
 
-    private function makeCurlResponseBody(CurlRequest $request, string $rawResponse, int $headerSize): CurlResponseBody
+    private function makeCurlResponseBody(CurlRequestInterface $request, string $rawResponse, int $headerSize): CurlResponseBody
     {
         if ($request->hasHeaders()) {
             return new CurlResponseBody(substr($rawResponse, $headerSize));
@@ -40,7 +41,7 @@ class CurlResponse implements CurlResponseInterface
         return new CurlResponseBody($rawResponse);
     }
 
-    private function makeCurlResponseHeader(CurlRequest $request, string $rawResponse, int $headerSize): CurlResponseHeader
+    private function makeCurlResponseHeader(CurlRequestInterface $request, string $rawResponse, int $headerSize): CurlResponseHeader
     {
         if ($request->hasHeaders()) {
             return new CurlResponseHeader(substr($rawResponse, 0, $headerSize));
