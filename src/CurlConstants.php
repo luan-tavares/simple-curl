@@ -30,4 +30,10 @@ abstract class CurlConstants
     public const MULTI_STATUS = 207;
 
     public const TOO_MANY_REQUESTS_STATUS = 429;
+
+    public const CONFLIC_STATUS_ERROR = 409;
+
+    public const NOT_FOUND_STATUS_ERROR = 404;
+
+    public const TIMEOUT_STATUS_ERROR = 408;
 }

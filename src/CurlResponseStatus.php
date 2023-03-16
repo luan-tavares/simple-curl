@@ -29,4 +29,19 @@ class CurlResponseStatus implements CurlResponseStatusInterface
     {
         return ($this->status === CurlConstants::TOO_MANY_REQUESTS_STATUS);
     }
+
+    public function isConflicError(): bool
+    {
+        return ($this->status === CurlConstants::CONFLIC_STATUS_ERROR);
+    }
+
+    public function isNotFoundError(): bool
+    {
+        return ($this->status === CurlConstants::NOT_FOUND_STATUS_ERROR);
+    }
+
+    public function isTimeoutError(): bool
+    {
+        return ($this->status === CurlConstants::TIMEOUT_STATUS_ERROR);
+    }
 }

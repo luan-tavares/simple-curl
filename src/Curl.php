@@ -116,26 +116,6 @@ class Curl implements CurlInterface
 
     /**After Request */
 
-    public function status(): int
-    {
-        return $this->response->status();
-    }
-
-    public function error(): bool
-    {
-        return $this->response->error();
-    }
-
-    public function isMultiStatus(): bool
-    {
-        return $this->response->isMultiStatus();
-    }
-
-    public function isTooManyCurlRequestsError(): bool
-    {
-        return $this->response->isTooManyCurlRequestsError();
-    }
-
     public function response(): string
     {
         return $this->response->get();
@@ -159,5 +139,44 @@ class Curl implements CurlInterface
     public function uri(): string
     {
         return $this->request->uri();
+    }
+
+    /** Status */
+
+    public function status(): int
+    {
+        return $this->response->status();
+    }
+
+    public function isMultiStatus(): bool
+    {
+        return $this->response->isMultiStatus();
+    }
+
+    /** Errors */
+
+    public function error(): bool
+    {
+        return $this->response->error();
+    }
+
+    public function isTooManyCurlRequestsError(): bool
+    {
+        return $this->response->isTooManyCurlRequestsError();
+    }
+
+    public function isConflicError(): bool
+    {
+        return $this->response->isConflicError();
+    }
+
+    public function isNotFoundError(): bool
+    {
+        return $this->response->isNotFoundError();
+    }
+
+    public function isTimeoutError(): bool
+    {
+        return $this->response->isTimeoutError();
     }
 }

@@ -50,26 +50,6 @@ class CurlResponse implements CurlResponseInterface
         return new CurlResponseHeader;
     }
 
-    public function status(): int
-    {
-        return $this->status->get();
-    }
-
-    public function error(): bool
-    {
-        return $this->status->error();
-    }
-
-    public function isMultiStatus(): bool
-    {
-        return $this->status->isMultiStatus();
-    }
-
-    public function isTooManyCurlRequestsError(): bool
-    {
-        return $this->status->isTooManyCurlRequestsError();
-    }
-
     public function get(): string
     {
         return $this->body->get();
@@ -93,5 +73,44 @@ class CurlResponse implements CurlResponseInterface
     public function headers(): array|null
     {
         return $this->header->get();
+    }
+
+    /** Status */
+
+    public function status(): int
+    {
+        return $this->status->get();
+    }
+
+    public function isMultiStatus(): bool
+    {
+        return $this->status->isMultiStatus();
+    }
+
+    /** Errors */
+
+    public function error(): bool
+    {
+        return $this->status->error();
+    }
+
+    public function isTooManyCurlRequestsError(): bool
+    {
+        return $this->status->isTooManyCurlRequestsError();
+    }
+
+    public function isConflicError(): bool
+    {
+        return $this->status->isConflicError();
+    }
+
+    public function isNotFoundError(): bool
+    {
+        return $this->status->isNotFoundError();
+    }
+
+    public function isTimeoutError(): bool
+    {
+        return $this->status->isTimeoutError();
     }
 }

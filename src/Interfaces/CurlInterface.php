@@ -19,14 +19,21 @@ interface CurlInterface
     public function post(array|null $body = null): self;
     public function put(array|null $body = null): self;
     public function patch(array|null $body = null): self;
-
-    public function status(): int;
-    public function error(): bool;
-    public function isMultiStatus(): bool;
-    public function isTooManyCurlRequestsError(): bool;
+ 
     public function response(): string;
     public function toArray(): array;
     public function toObject(): object|array|null;
     public function headers(): array|null;
     public function uri(): string;
+
+    /** Status */
+    public function status(): int;
+    public function isMultiStatus(): bool;
+
+    /** Errors */
+    public function error(): bool;
+    public function isTooManyCurlRequestsError(): bool;
+    public function isConflicError(): bool;
+    public function isNotFoundError(): bool;
+    public function isTimeoutError(): bool;
 }
