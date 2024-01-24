@@ -13,6 +13,7 @@ interface CurlRequestInterface
     public function addQueries(array $queries): self;
     public function addBody(array|null $requestBody): self;
     public function addHeaders(array|string $mixed, string|int|null $value = null): self;
+    public function addCookies(array|string $mixed, string|int|null $value = null): self;
     public function addUri(string $uri): self;
     public function addMethod(string $method): self;
 

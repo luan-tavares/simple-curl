@@ -86,6 +86,13 @@ class Curl implements CurlInterface
         return $this;
     }
 
+    public function addCookies(array $cookies): self
+    {
+        $this->request->addCookies($cookies);
+
+        return $this;
+    }
+
     public function bearerToken(string $token): self
     {
         $this->request->addHeaders(['Authorization' => "Bearer {$token}"]);
