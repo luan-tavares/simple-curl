@@ -12,6 +12,8 @@ class CurlRequest implements CurlRequestInterface
 
     private array $headers = [];
 
+    private array $cookies = [];
+
     private array|null $queries = null;
 
     private array|null $body = null;
@@ -37,7 +39,7 @@ class CurlRequest implements CurlRequestInterface
     {
         $this->addBody($body)->addMethod($method);
         
-        $this->resolveHeaders();
+        $this->resolveHeaders()->resolveCookies();
 
         $this->curl = curl_init();
 
@@ -62,6 +64,17 @@ class CurlRequest implements CurlRequestInterface
             $headersParams[] = "{$name}{$value}";
         }
         $this->params[CURLOPT_HTTPHEADER] = $headersParams;
+
+        return $this;
+    }
+
+    private function resolveCookies(): self
+    {
+        $params = [];
+        foreach ($this->cookies as $name => $value) {
+            $params[] = "{$name}={$value}";
+        }
+        $this->params[CURLOPT_COOKIE] = implode(';', $params);
 
         return $this;
     }
@@ -119,6 +132,20 @@ class CurlRequest implements CurlRequestInterface
         }
 
         $this->params[CURLOPT_POSTFIELDS] = $this->body;
+
+        return $this;
+    }
+
+    public function addCookies(array|string $mixed, string|int|null $value = null): self
+    {
+        if (is_array($mixed)) {
+            $this->cookies = array_replace($this->cookies, $mixed);
+
+            return $this;
+        }
+
+        $this->cookies[$mixed] = $value;
+
 
         return $this;
     }
