@@ -13,8 +13,6 @@ abstract class CurlConstants
         CURLOPT_MAXREDIRS       => -1,
         CURLOPT_TIMEOUT         => 0,
         CURLOPT_HEADER          => false,
-        //CURLOPT_FORBID_REUSE    => true,
-        //CURLINFO_HEADER_OUT     => false
     ];
 
     public const DEFAULT_CONTENT_TYPE = self::CONTENT_TYPE_APPLICATION_JSON;

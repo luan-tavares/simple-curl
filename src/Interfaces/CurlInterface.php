@@ -13,6 +13,7 @@ interface CurlInterface
     public function multipartFormData(): self;
     public function formUrlEncoded(): self;
     public function progressBar(): self;
+    public function setTimeout(int $seconds): self;
     
     public function request(string $method, array|null $body = null): self;
     public function get(): self;

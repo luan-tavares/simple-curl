@@ -121,6 +121,13 @@ class Curl implements CurlInterface
         return $this;
     }
 
+    public function setTimeout(int $seconds): self
+    {
+        $this->request->setTimeout($seconds);
+      
+        return $this;
+    }
+
     /**After Request */
 
     public function response(): string

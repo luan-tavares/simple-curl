@@ -86,6 +86,13 @@ class CurlRequest implements CurlRequestInterface
         return $this;
     }
 
+    public function setTimeout(int $seconds): self
+    {
+        $this->params[CURLOPT_TIMEOUT] = $seconds;
+
+        return $this;
+    }
+
     public function addParams(array|string $mixed, string|int|null $value = null): self
     {
         if (is_array($mixed)) {

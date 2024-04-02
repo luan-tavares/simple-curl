@@ -16,6 +16,7 @@ interface CurlRequestInterface
     public function addCookies(array|string $mixed, string|int|null $value = null): self;
     public function addUri(string $uri): self;
     public function addMethod(string $method): self;
+    public function setTimeout(int $seconds): self;
 
     public function multipartFormData(): self;
     public function formUrlEncoded(): self;

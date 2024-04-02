@@ -2,6 +2,7 @@
 
 namespace LTL\Curl;
 
+use LTL\Curl\CurlException;
 use LTL\Curl\CurlResponseBody;
 use LTL\Curl\CurlResponseStatus;
 use LTL\Curl\Interfaces\CurlRequestInterface;
@@ -16,18 +17,23 @@ class CurlResponse implements CurlResponseInterface
     private CurlResponseHeader $header;
 
 
-
     public function __construct(CurlRequestInterface $request)
     {
-        $rawResponse = curl_exec($request->curl());
+        $curl = $request->curl();
 
-        $headerSize = curl_getinfo($request->curl(), CURLINFO_HEADER_SIZE);
+        $rawResponse = curl_exec($curl);
+
+        if(($errorCode = curl_errno($curl)) !== 0) {
+            throw new CurlException(curl_error($curl), $errorCode);
+        }
+
+        $headerSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
       
         $this->body = $this->makeCurlResponseBody($request, $rawResponse, $headerSize);
         
         $this->header = $this->makeCurlResponseHeader($request, $rawResponse, $headerSize);
 
-        $status = curl_getinfo($request->curl(), CURLINFO_HTTP_CODE);
+        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         $this->status = new CurlResponseStatus($status);
     }
