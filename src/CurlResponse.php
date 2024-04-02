@@ -25,7 +25,7 @@ class CurlResponse implements CurlResponseInterface
 
         if(($errorCode = curl_errno($curl)) !== 0) {
             throw new CurlException(curl_error($curl), $errorCode);
-        }/** */
+        }
 
         $headerSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
       
