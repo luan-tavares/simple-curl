@@ -3,11 +3,10 @@
 namespace LTL\Curl\Interfaces;
 
 use CurlHandle;
-use LTL\Curl\Interfaces\CurlResponseInterface;
 
 interface CurlRequestInterface
 {
-    public function connect(string $method, array|null $body = null): CurlResponseInterface;
+    public function connect(string $method, array|null $body = null): void;
 
     public function addParams(array|string $mixed, string|int|null $value = null): self;
     public function addQueries(array $queries): self;

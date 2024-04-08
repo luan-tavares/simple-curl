@@ -2,6 +2,7 @@
 
 namespace LTL\Curl;
 
+use LTL\Curl\Async\CurlAsyncRequest;
 use LTL\Curl\CurlException;
 use LTL\Curl\CurlResponseBody;
 use LTL\Curl\CurlResponseStatus;
@@ -21,7 +22,11 @@ class CurlResponse implements CurlResponseInterface
     {
         $curl = $request->curl();
 
-        $rawResponse = curl_exec($curl);
+        if($request instanceof CurlAsyncRequest) {
+            $rawResponse = curl_multi_getcontent($curl);
+        } else {
+            $rawResponse = curl_exec($curl);
+        }
 
         if(($errorCode = curl_errno($curl)) !== 0) {
             throw new CurlException(curl_error($curl), $errorCode);
@@ -36,6 +41,10 @@ class CurlResponse implements CurlResponseInterface
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         $this->status = new CurlResponseStatus($status);
+
+        if($request instanceof CurlRequest) {
+            curl_close($curl);
+        }
     }
 
     private function makeCurlResponseBody(CurlRequestInterface $request, string $rawResponse, int $headerSize): CurlResponseBody
