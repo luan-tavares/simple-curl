@@ -20,6 +20,7 @@ interface CurlRequestInterface
     public function multipartFormData(): self;
     public function formUrlEncoded(): self;
     public function progressBar(): self;
+    public function proxySocks5(string $proxy): self;
 
     public function hasHeaders(): bool;
     public function withHeaders(): self;

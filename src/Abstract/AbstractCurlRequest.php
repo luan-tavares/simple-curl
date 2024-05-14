@@ -5,9 +5,7 @@ namespace LTL\Curl\Abstract;
 use CurlHandle;
 use LTL\Curl\CurlConstants;
 use LTL\Curl\CurlProgressBar;
-use LTL\Curl\CurlResponse;
 use LTL\Curl\Interfaces\CurlRequestInterface;
-use LTL\Curl\Interfaces\CurlResponseInterface;
 
 abstract class AbstractCurlRequest implements CurlRequestInterface
 {
@@ -181,6 +179,13 @@ abstract class AbstractCurlRequest implements CurlRequestInterface
         return $this->addParams([
             CURLOPT_PROGRESSFUNCTION => CurlProgressBar::progress(...),
             CURLOPT_NOPROGRESS => false,
+        ]);
+    }
+
+    public function proxySocks5(string $proxy): CurlRequestInterface
+    {
+        return $this->addParams([
+            CURLOPT_PROXY => "socks5h://{$proxy}"
         ]);
     }
 

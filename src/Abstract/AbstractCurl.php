@@ -129,6 +129,13 @@ abstract class AbstractCurl implements CurlInterface
         return $this;
     }
 
+    public function proxySocks5(string $proxy): self
+    {
+        $this->request->proxySocks5($proxy);
+
+        return $this;
+    }
+
     /**After Request */
 
     public function response(): string
