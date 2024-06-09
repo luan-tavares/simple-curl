@@ -189,6 +189,13 @@ abstract class AbstractCurlRequest implements CurlRequestInterface
         ]);
     }
 
+    public function followLocation(): CurlRequestInterface
+    {
+        return $this->addParams([
+            CURLOPT_FOLLOWLOCATION => true
+        ]);
+    }
+
     public function addUri(string $uri): self
     {
         $this->uri = $uri;

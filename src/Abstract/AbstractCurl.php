@@ -136,6 +136,13 @@ abstract class AbstractCurl implements CurlInterface
         return $this;
     }
 
+    public function followLocation(): self
+    {
+        $this->request->followLocation();
+        
+        return $this;
+    }
+
     /**After Request */
 
     public function response(): string
