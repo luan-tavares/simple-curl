@@ -16,6 +16,7 @@ interface CurlInterface
     public function setTimeout(int $seconds): self;
     public function proxySocks5(string $proxy): self;
     public function followLocation(): self;
+    public function saveInFile(string $path): self;
     
     public function request(string $method, array|null $body = null): self;
     public function get(): self;

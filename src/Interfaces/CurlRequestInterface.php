@@ -22,6 +22,7 @@ interface CurlRequestInterface
     public function progressBar(): self;
     public function proxySocks5(string $proxy): self;
     public function followLocation(): self;
+    public function saveInFile(string $path): self;
 
     public function hasHeaders(): bool;
     public function withHeaders(): self;

@@ -143,6 +143,13 @@ abstract class AbstractCurl implements CurlInterface
         return $this;
     }
 
+    public function saveInFile(string $path): self
+    {
+        $this->request->saveInFile($path);
+        
+        return $this;
+    }
+
     /**After Request */
 
     public function response(): string

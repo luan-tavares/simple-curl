@@ -196,6 +196,16 @@ abstract class AbstractCurlRequest implements CurlRequestInterface
         ]);
     }
 
+    public function saveInFile(string $path): CurlRequestInterface
+    {
+        $file = fopen($path, 'w');
+
+        return $this->addParams([
+            CURLOPT_RETURNTRANSFER => false,
+            CURLOPT_FILE => $file
+        ]);
+    }
+
     public function addUri(string $uri): self
     {
         $this->uri = $uri;
