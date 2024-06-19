@@ -13,7 +13,7 @@ class CurlAsync extends AbstractCurl
         return new CurlAsyncRequest($uri);
     }
 
-    public function request(string $method, array|null $body = null): self
+    public function request(string $method, array|null|string $body = null): self
     {
         $this->request->connect($method, $body);
 

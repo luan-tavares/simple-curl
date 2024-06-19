@@ -19,7 +19,7 @@ interface CurlInterface
     public function followLocation(): self;
     public function saveInFile(string $path): self;
     
-    public function request(string $method, array|null $body = null): self;
+    public function request(string $method, array|null|string $body = null): self;
     public function get(): self;
     public function delete(): self;
     public function post(array|string|null $body = null): self;

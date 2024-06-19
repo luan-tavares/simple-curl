@@ -12,7 +12,7 @@ class Curl extends AbstractCurl
         return new CurlRequest($uri);
     }
 
-    public function request(string $method, array|null $body = null): self
+    public function request(string $method, array|null|string $body = null): self
     {
         $this->request->connect($method, $body);
 
