@@ -17,7 +17,7 @@ abstract class AbstractCurlRequest implements CurlRequestInterface
 
     private array|null $queries = null;
 
-    private array|null $body = null;
+    private array|string|null $body = null;
 
     private string $method;
 
