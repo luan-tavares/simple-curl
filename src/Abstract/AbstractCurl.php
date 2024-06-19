@@ -15,6 +15,11 @@ abstract class AbstractCurl implements CurlInterface
     public function __construct(string|null $uri = null)
     {
         $this->request = $this->initRequest($uri);
+        $this->boot();
+    }
+
+    protected function boot(): void
+    {
     }
 
     abstract protected function initRequest(string|null $uri): CurlRequestInterface;
@@ -24,7 +29,7 @@ abstract class AbstractCurl implements CurlInterface
         return $this->request('GET');
     }
 
-    public function post(array|null $body = null): self
+    public function post(array|string|null $body = null): self
     {
         return $this->request('POST', $body);
     }
@@ -69,6 +74,13 @@ abstract class AbstractCurl implements CurlInterface
     public function formUrlEncoded(): self
     {
         $this->request->formUrlEncoded();
+
+        return $this;
+    }
+
+    public function contentTypeXml(): self
+    {
+        $this->request->contentTypeXml();
 
         return $this;
     }

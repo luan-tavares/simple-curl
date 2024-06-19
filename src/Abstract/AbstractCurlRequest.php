@@ -36,7 +36,7 @@ abstract class AbstractCurlRequest implements CurlRequestInterface
         }
     }
 
-    public function connect(string $method, array|null $body = null): void
+    public function connect(string $method, array|string|null $body = null): void
     {
         $this->addBody($body)->addMethod($method);
         
@@ -109,13 +109,19 @@ abstract class AbstractCurlRequest implements CurlRequestInterface
         return $this;
     }
 
-    public function addBody(array|null $requestBody): self
+    public function addBody(array|string|null $requestBody): self
     {
         $this->body = $requestBody;
 
         if (!$this->body || empty($this->body)) {
             unset($this->params[CURLOPT_POSTFIELDS]);
 
+            return $this;
+        }
+
+        if(is_string($this->body)) {
+            $this->params[CURLOPT_POSTFIELDS] = $this->body;
+      
             return $this;
         }
 
@@ -162,6 +168,11 @@ abstract class AbstractCurlRequest implements CurlRequestInterface
 
 
         return $this;
+    }
+
+    public function contentTypeXml(): self
+    {
+        return $this->addHeaders('Content-Type', CurlConstants::CONTENT_TYPE_APPLICATION_XML);
     }
 
     public function multipartFormData(): self

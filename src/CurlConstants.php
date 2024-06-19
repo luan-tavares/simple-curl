@@ -22,6 +22,8 @@ abstract class CurlConstants
     public const CONTENT_TYPE_APPLICATION_JSON = 'application/json';
 
     public const CONTENT_TYPE_APPLICATION_FORM_URLENCODED = 'application/x-www-form-urlencoded';
+
+    public const CONTENT_TYPE_APPLICATION_XML = 'application/xml';
     
     public const JSON_ENCODE = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 

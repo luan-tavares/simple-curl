@@ -6,7 +6,7 @@ use CurlHandle;
 
 interface CurlRequestInterface
 {
-    public function connect(string $method, array|null $body = null): void;
+    public function connect(string $method, array|string|null $body = null): void;
 
     public function addParams(array|string $mixed, string|int|null $value = null): self;
     public function addQueries(array $queries): self;
@@ -19,6 +19,7 @@ interface CurlRequestInterface
 
     public function multipartFormData(): self;
     public function formUrlEncoded(): self;
+    public function contentTypeXml(): self;
     public function progressBar(): self;
     public function proxySocks5(string $proxy): self;
     public function followLocation(): self;

@@ -11,6 +11,7 @@ interface CurlInterface
     public function addQueries(array $queries): self;
     public function withHeaders(): self;
     public function multipartFormData(): self;
+    public function contentTypeXml(): self;
     public function formUrlEncoded(): self;
     public function progressBar(): self;
     public function setTimeout(int $seconds): self;
@@ -21,7 +22,7 @@ interface CurlInterface
     public function request(string $method, array|null $body = null): self;
     public function get(): self;
     public function delete(): self;
-    public function post(array|null $body = null): self;
+    public function post(array|string|null $body = null): self;
     public function put(array|null $body = null): self;
     public function patch(array|null $body = null): self;
  
