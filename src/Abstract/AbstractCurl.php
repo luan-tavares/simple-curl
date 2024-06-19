@@ -50,7 +50,7 @@ abstract class AbstractCurl implements CurlInterface
     }
 
 
-    public function request(string $method, array|null $body = null): self
+    public function request(string $method, array|null|string $body = null): self
     {
         $this->response = $this->request->connect($method, $body);
 
