@@ -18,9 +18,12 @@ abstract class AbstractCurl implements CurlInterface
         $this->boot();
     }
 
-    protected function boot(): void
+    public static function build(string $uri): self
     {
+        return new static($uri);
     }
+
+    protected function boot(): void {}
 
     abstract protected function initRequest(string|null $uri): CurlRequestInterface;
 
@@ -137,7 +140,7 @@ abstract class AbstractCurl implements CurlInterface
     public function setTimeout(int $seconds): self
     {
         $this->request->setTimeout($seconds);
-      
+
         return $this;
     }
 
@@ -151,14 +154,14 @@ abstract class AbstractCurl implements CurlInterface
     public function followLocation(): self
     {
         $this->request->followLocation();
-        
+
         return $this;
     }
 
     public function saveInFile(string $path): self
     {
         $this->request->saveInFile($path);
-        
+
         return $this;
     }
 

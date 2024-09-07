@@ -4,6 +4,8 @@ namespace LTL\Curl\Interfaces;
 
 interface CurlInterface
 {
+    public static function build(string $uri): self;
+
     public function addParams(array $params): self;
     public function addHeaders(array $headers): self;
     public function addCookies(array $cookies): self;
@@ -18,14 +20,14 @@ interface CurlInterface
     public function proxySocks5(string $proxy): self;
     public function followLocation(): self;
     public function saveInFile(string $path): self;
-    
+
     public function request(string $method, array|null|string $body = null): self;
     public function get(): self;
     public function delete(): self;
     public function post(array|string|null $body = null): self;
     public function put(array|null $body = null): self;
     public function patch(array|null $body = null): self;
- 
+
     public function response(): string;
     public function toArray(): array;
     public function toObject(): object|array|null;

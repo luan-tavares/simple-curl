@@ -2,9 +2,9 @@
 
 use LTL\Curl\Curl;
 
-require_once __DIR__ .'/__init.php';
+require_once __DIR__ . '/__init.php';
 
-$curl =   (new Curl('https://desincha/test'))->setTimeout(1)->get();
+$curl =   Curl::build('https://desincha/test')->get();
 
 //$curl = (new Curl('http://viacep.com.br/ws/01001000/json/'))->withHeaders()->get();
 
