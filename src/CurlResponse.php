@@ -42,30 +42,30 @@ class CurlResponse implements CurlResponseInterface
             $message = curl_error($curl);
             switch ($errorCode) {
                 case CURLE_OPERATION_TIMEDOUT:
-                    throw new CurlTimeoutException($message);
+                    throw new CurlTimeoutException($message, $errorCode);
                 case CURLE_RECV_ERROR:
-                    throw new CurlRecvException($message);
+                    throw new CurlRecvException($message, $errorCode);
                 case 92:
-                    throw new CurlHttp2StreamException($message);
+                    throw new CurlHttp2StreamException($message, $errorCode);
                 case CURLE_SSL_CONNECT_ERROR:
                 case CURLE_SSL_CACERT:
                 case 51:
-                    throw new CurlTLSException($message);
+                    throw new CurlTLSException($message, $errorCode);
                 case CURLE_COULDNT_RESOLVE_HOST:
-                    throw new CurlHostResolveException($message);
+                    throw new CurlHostResolveException($message, $errorCode);
                 case CURLE_COULDNT_CONNECT:
-                    throw new CurlConnectionException($message);
+                    throw new CurlConnectionException($message, $errorCode);
                 case CURLE_TOO_MANY_REDIRECTS:
-                    throw new CurlTooManyRedirectsException($message);
+                    throw new CurlTooManyRedirectsException($message, $errorCode);
                 case CURLE_PARTIAL_FILE:
-                    throw new CurlPartialFileException($message);
+                    throw new CurlPartialFileException($message, $errorCode);
                 case CURLE_SEND_ERROR:
-                    throw new CurlSendException($message);
+                    throw new CurlSendException($message, $errorCode);
                 case 58:
-                    throw new CurlTLSEngineException($message);
+                    throw new CurlTLSEngineException($message, $errorCode);
                 default:
                     if (str_contains($message, 'HTTP/2 stream')) {
-                        throw new CurlHttp2StreamException($message);
+                        throw new CurlHttp2StreamException($message, $errorCode);
                     }
 
                     throw new CurlException($message, $errorCode);
