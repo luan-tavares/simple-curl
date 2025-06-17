@@ -67,6 +67,7 @@ class CurlResponse implements CurlResponseInterface
                     if (str_contains($message, 'HTTP/2 stream')) {
                         throw new CurlHttp2StreamException($message);
                     }
+                    /** */
                     throw new CurlException($message, $errorCode);
             }
         }
