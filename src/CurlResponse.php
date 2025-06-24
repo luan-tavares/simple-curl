@@ -2,22 +2,25 @@
 
 namespace LTL\Curl;
 
-use CurlConnectionException;
-use CurlHostResolveException;
-use CurlHttp2StreamException;
-use CurlPartialFileException;
-use CurlRecvException;
-use CurlSendException;
-use CurlTimeoutException;
-use CurlTLSEngineException;
-use CurlTLSException;
-use CurlTooManyRedirectsException;
-use LTL\Curl\Async\CurlAsyncRequest;
+
+use LTL\Curl\CurlRequest;
 use LTL\Curl\CurlException;
 use LTL\Curl\CurlResponseBody;
+use LTL\Curl\CurlResponseHeader;
 use LTL\Curl\CurlResponseStatus;
+use LTL\Curl\Async\CurlAsyncRequest;
+use LTL\Curl\Exceptions\CurlTLSException;
+use LTL\Curl\Exceptions\CurlRecvException;
+use LTL\Curl\Exceptions\CurlSendException;
+use LTL\Curl\Exceptions\CurlTimeoutException;
 use LTL\Curl\Interfaces\CurlRequestInterface;
 use LTL\Curl\Interfaces\CurlResponseInterface;
+use LTL\Curl\Exceptions\CurlTLSEngineException;
+use LTL\Curl\Exceptions\CurlConnectionException;
+use LTL\Curl\Exceptions\CurlHostResolveException;
+use LTL\Curl\Exceptions\CurlHttp2StreamException;
+use LTL\Curl\Exceptions\CurlPartialFileException;
+use LTL\Curl\Exceptions\CurlTooManyRedirectsException;
 
 class CurlResponse implements CurlResponseInterface
 {
